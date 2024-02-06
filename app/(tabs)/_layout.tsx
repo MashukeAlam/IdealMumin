@@ -1,12 +1,12 @@
 import React from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Link, Tabs } from 'expo-router';
-import { Pressable } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
 
 import Colors from '@/constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
 import { useClientOnlyValue } from '@/components/useClientOnlyValue';
-
+import {BlurView} from 'expo-blur';
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>['name'];
@@ -29,8 +29,9 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          
+          title: 'Surah List',
+          tabBarIcon: ({ color }) => <TabBarIcon name="tasks" color={color} />,
           headerRight: () => (
             <Link href="/modal" asChild>
               <Pressable>
@@ -45,15 +46,41 @@ export default function TabLayout() {
               </Pressable>
             </Link>
           ),
+          headerStyle: {
+            backgroundColor: "rgba(255, 255, 255, 0.7)"
+          },
+          
         }}
       />
       <Tabs.Screen
         name="two"
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Streaks',
+          tabBarIcon: ({ color }) => <TabBarIcon name="bolt" color={color} />,
         }}
       />
+      <Tabs.Screen
+        name="surahs/[id]"
+        options={{
+          href: null,
+          headerTitle: "Surah",
+          
+        }}
+      />
+      <Tabs.Screen
+        name="(surahs)/[id]"
+        options={{
+          href: null
+        }}
+      />
+      <Tabs.Screen
+        name="surahs/SurahNumberContainer"
+        options={{
+          href: null
+        }}
+      />
+      
+
     </Tabs>
   );
 }
