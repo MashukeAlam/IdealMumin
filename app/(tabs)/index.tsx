@@ -70,11 +70,11 @@ const styles = StyleSheet.create({
   },
   surahName: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: '600',
   },
   surahNameTranslation: {
-    fontSize: 13,
-    fontWeight: 'bold',
+    fontSize: 11,
+    fontWeight: 'light',
   },
   separator: {
     marginVertical: 30,

@@ -24,10 +24,9 @@ const styles = StyleSheet.create({
     height: 27,
     borderRadius: 50,
     marginLeft: 9,
-    marginRight: 9,
+    marginRight: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    
   },
   numberText: {
     fontSize: 12,

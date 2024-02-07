@@ -64,7 +64,8 @@ function Surah() {
 
 const styles = StyleSheet.create({
     textStyle: {
-        fontSize: 20
+        fontSize: 25,
+        fontFamily: "Uthman",
     },
     listContainer: {
         padding: 10,
