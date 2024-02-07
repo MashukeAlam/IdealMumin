@@ -1,11 +1,11 @@
 import { Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
-
-import EditScreenInfo from '@/components/EditScreenInfo';
+import Storage from 'expo-storage'
 import { Text, View } from '@/components/Themed';
 import { FlashList } from '@shopify/flash-list';
 import { useEffect, useState } from 'react';
 import { router } from 'expo-router';
 import CircularNumberContainer from './surahs/SurahNumberContainer';
+
 
 const DATA = [
   {
@@ -29,12 +29,31 @@ export default function TabOneScreen() {
 
         const data = await response.json();
         setSurahData(data.data);
+        await Storage.setItem({
+          key: `surahList`,
+          value: JSON.stringify(data.data)
+        });
+
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
-    fetchData();
+    const configureData = async (key: string) => {
+      const jsonValue = await Storage.getItem({key: key});
+      // console.log(jsonValue, "inside function");
+      
+      if (jsonValue !== null) {
+        console.log("No loading was needed.");
+        setSurahData(JSON.parse(jsonValue));
+        
+      } else {
+        console.log("Fresh loading was needed this time.");
+        fetchData();
+      }
+    }
+    
+    configureData("surahList");
   }, []);
 
 

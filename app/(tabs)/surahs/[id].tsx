@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { useLocalSearchParams } from 'expo-router';
 import CircularNumberContainer from './SurahNumberContainer';
 import { BlurView } from 'expo-blur';
+import Storage from 'expo-storage';
 
 function Surah() {
     const { id } = useLocalSearchParams<{ id: string }>();
@@ -22,10 +23,29 @@ function Surah() {
 
             const data = await response.json();
             setSurahData(data.data.ayahs);
+            await Storage.setItem({
+                key: `${id}`,
+                value: JSON.stringify(data.data.ayahs)
+            });
         } catch (error) {
             console.error('Error fetching data:', error);
         }
         };
+
+        const configureData = async (key: string) => {
+            const jsonValue = await Storage.getItem({key: key});
+            
+            if (jsonValue !== null) {
+              console.log("No loading was needed.");
+              setSurahData(JSON.parse(jsonValue));
+              
+            } else {
+              console.log("Fresh loading was needed this time.");
+              fetchData();
+            }
+          }
+          
+          configureData(`${id}`);
 
     fetchData();
 
@@ -38,7 +58,7 @@ function Surah() {
       {surahData != null ? 
       <FlashList
         data={surahData}
-        renderItem={({ item }) => <View style={styles.listContainer}>{console.log(item)}<CircularNumberContainer style={styles.ayahNumber} ayahNumber={item.numberInSurah}/><Text style={styles.textStyle}>{item.text}</Text></View>}
+        renderItem={({ item }) => <View style={styles.listContainer}><CircularNumberContainer style={styles.ayahNumber} ayahNumber={item.numberInSurah}/><Text style={styles.textStyle}>{item.text}</Text></View>}
         estimatedItemSize={200}
       /> : <Text>Not loaded</Text>}
  </View>
