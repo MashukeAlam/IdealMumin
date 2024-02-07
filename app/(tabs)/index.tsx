@@ -5,6 +5,7 @@ import { FlashList } from '@shopify/flash-list';
 import { useEffect, useState } from 'react';
 import { router } from 'expo-router';
 import CircularNumberContainer from './surahs/SurahNumberContainer';
+import {SvgXml} from 'react-native-svg';
 
 interface CacheMap {
   [key: number]: boolean;
