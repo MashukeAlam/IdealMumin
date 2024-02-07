@@ -40,32 +40,32 @@ export default function TabOneScreen() {
     };
 
     const configureData = async (key: string) => {
-      const jsonValue = await Storage.getItem({key: key});
+      const jsonValue = await Storage.getItem({ key: key });
       // console.log(jsonValue, "inside function");
-      
+
       if (jsonValue !== null) {
         console.log("No loading was needed.");
         setSurahData(JSON.parse(jsonValue));
-        
+
       } else {
         console.log("Fresh loading was needed this time.");
         fetchData();
       }
     }
-    
+
     configureData("surahList");
   }, []);
 
 
   return (
     <View style={{ height: Dimensions.get("window").height, width: Dimensions.get("screen").width }}>
-      {surahData != null ? 
-      <FlashList
-        data={surahData}
-        renderItem={({ item }) => <TouchableOpacity style={styles.listContainer} onPress={() => router.push({pathname: "surahs/[id]", params: {id: item.number}})}><CircularNumberContainer ayahNumber={item.number}/><Text style={styles.surahName}>{item.englishName}</Text></TouchableOpacity>}
-        estimatedItemSize={200}
-      /> : <Text>Not loaded</Text>}
-  </View>
+      {surahData != null ?
+        <FlashList
+          data={surahData}
+          renderItem={({ item }) => <TouchableOpacity style={styles.listContainer} onPress={() => router.push({ pathname: "surahs/[id]", params: { id: item.number } })}><CircularNumberContainer ayahNumber={item.number} /><Text style={styles.surahName}>{item.englishName}</Text></TouchableOpacity>}
+          estimatedItemSize={200}
+        /> : <Text>Not loaded</Text>}
+    </View>
   );
 }
 
@@ -88,13 +88,13 @@ const styles = StyleSheet.create({
     height: 1,
     width: '80%',
   },
-  item : {
+  item: {
     height: 4,
   },
-  listContainer : {
+  listContainer: {
     padding: 10,
     marginRight: 5,
     flex: 1,
     flexDirection: "row"
-},
+  },
 });
