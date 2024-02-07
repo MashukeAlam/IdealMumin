@@ -62,7 +62,7 @@ export default function TabOneScreen() {
       {surahData != null ?
         <FlashList
           data={surahData}
-          renderItem={({ item }) => <TouchableOpacity style={styles.listContainer} onPress={() => router.push({ pathname: "surahs/[id]", params: { id: item.number } })}><CircularNumberContainer ayahNumber={item.number} /><Text style={styles.surahName}>{item.englishName}</Text></TouchableOpacity>}
+          renderItem={({ item }) => <TouchableOpacity style={styles.listContainer} onPress={() => router.push({ pathname: "surahs/[id]", params: { id: item.number } })}><CircularNumberContainer ayahNumber={item.number} /><View style={styles.nameContainer}><Text style={styles.surahName}>{item.englishName}</Text><Text style={styles.surahNameTranslation}>{item.englishNameTranslation}</Text></View></TouchableOpacity>}
           estimatedItemSize={200}
         /> : <Text>Not loaded</Text>}
     </View>
@@ -80,7 +80,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   surahName: {
-    fontSize: 15,
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  surahNameTranslation: {
+    fontSize: 13,
     fontWeight: 'bold',
   },
   separator: {
@@ -95,6 +99,14 @@ const styles = StyleSheet.create({
     padding: 10,
     marginRight: 5,
     flex: 1,
-    flexDirection: "row"
+    flexDirection: "row",
+    alignItems: "center",
+    borderBottomWidth: 0.3,
+    borderBottomColor: "rgb(50, 50, 50)"
   },
+  nameContainer: {
+    flex: 1,
+    flexDirection: "column",
+    marginLeft: 10
+  }
 });
