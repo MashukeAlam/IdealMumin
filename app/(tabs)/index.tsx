@@ -6,15 +6,6 @@ import { useEffect, useState } from 'react';
 import { router } from 'expo-router';
 import CircularNumberContainer from './surahs/SurahNumberContainer';
 
-const DATA = [
-  {
-    title: "First Item",
-  },
-  {
-    title: "Second Item",
-  },
-];
-
 export default function TabOneScreen() {
   const [surahData, setSurahData] = useState(null);
 
