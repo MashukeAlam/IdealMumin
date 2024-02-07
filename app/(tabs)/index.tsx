@@ -50,8 +50,8 @@ const svgMedinaah = `
 `;
 
 export default function TabOneScreen() {
-  const svgKaabaTSX = <SvgXml xml={svgKaaba} height={10} width={10} />;
-  const svgMedinaahTSX = <SvgXml xml={svgMedinaah} height={10} width={10} />
+  const svgKaabaTSX = <SvgXml style={styles.revelationIcon} xml={svgKaaba} height={10} width={10} />;
+  const svgMedinaahTSX = <SvgXml style={styles.revelationIcon} xml={svgMedinaah} height={10} width={10} />
   const [surahData, setSurahData] = useState(null);
 
   const [cacheMap, setCacheMap] = useState<CacheMap>(() => {
@@ -67,8 +67,7 @@ export default function TabOneScreen() {
   }
 
   const surahRevelationType = (id: number) => {
-    console.log(surahData[id]);
-    
+    if (surahData === null) return <View></View>;
     return surahData[id]["revelationType"] == "Meccan" ? svgKaabaTSX : svgMedinaahTSX;
   }
 
@@ -143,10 +142,12 @@ export default function TabOneScreen() {
                 <CircularNumberContainer ayahNumber={item.number} />
                 <View style={styles.nameContainer}>
                   <Text style={surahNameStyle(item.number)}>{item.englishName}</Text>
-                  <Text style={styles.surahNameTranslation}>
-                    {item.englishNameTranslation}
+                  <View style={styles.surahBottomLineContainer}>
+                    <Text style={styles.surahNameTranslation}>
+                      {item.englishNameTranslation}
+                    </Text>
                     {surahRevelationType(item.number)}
-                  </Text>
+                  </View>
                 </View>
               </View>
               <View>
@@ -216,5 +217,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     marginLeft: 10
+  },
+  surahBottomLineContainer: {
+    flex: 1,
+    flexDirection: "row"
+  },
+  revelationIcon: {
+    margin: 5
   }
 });
