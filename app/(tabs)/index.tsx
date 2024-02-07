@@ -6,8 +6,20 @@ import { useEffect, useState } from 'react';
 import { router } from 'expo-router';
 import CircularNumberContainer from './surahs/SurahNumberContainer';
 
+interface CacheMap {
+  [key: number]: boolean;
+}
+
 export default function TabOneScreen() {
   const [surahData, setSurahData] = useState(null);
+
+  const [cacheMap, setCacheMap] = useState<CacheMap>(() => {
+    const initialMap: CacheMap = {};
+    for (let i = 1; i <= 114; i++) {
+      initialMap[i] = false;
+    }
+    return initialMap;
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,7 +53,20 @@ export default function TabOneScreen() {
         fetchData();
       }
     }
+    
+    const checkAvailabity = async () => {
+      for (var i = 0; i < 114; i++) {
+        const fetchedJson = await Storage.getItem({key: `${i}`});
+        if (fetchedJson !== null) {
+          setCacheMap((prevMap) => ({
+            ...prevMap,
+            [i]: true
+          }));
+        }
+      }
+    }
 
+    checkAvailabity();
     configureData("surahList");
   }, []);
 
