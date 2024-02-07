@@ -8,7 +8,7 @@ const CircularNumberContainer = ({ayahNumber}) => {
 
   return (
     <LinearGradient
-      colors={['#AAFFAA', '#AADD00']}
+      colors={['#BBFFBB', '#AADD00']}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={styles.circularContainer}
@@ -23,15 +23,15 @@ const styles = StyleSheet.create({
     width: 27,
     height: 27,
     borderRadius: 50,
-    marginLeft: 5,
-    marginRight: 5,
+    marginLeft: 9,
+    marginRight: 0,
     justifyContent: 'center',
     alignItems: 'center',
   },
   numberText: {
     fontSize: 12,
-    color: 'white',
-    fontWeight: 'bold',
+    color: 'rgb(9, 9, 9)',
+    fontWeight: '900',
   },
 });
 

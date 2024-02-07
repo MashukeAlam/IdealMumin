@@ -31,7 +31,7 @@ export default function TabLayout() {
         options={{
           
           title: 'Surah List',
-          tabBarIcon: ({ color }) => <TabBarIcon name="tasks" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />,
           headerRight: () => (
             <Link href="/modal" asChild>
               <Pressable>
