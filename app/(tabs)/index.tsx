@@ -21,6 +21,10 @@ export default function TabOneScreen() {
     return initialMap;
   });
 
+  const surahNameStyle = (id: number) => {
+    return cacheMap[id] ? styles.surahNameGreen : styles.surahName;
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -78,6 +82,7 @@ export default function TabOneScreen() {
           data={surahData}
           renderItem={({ item }) => (
             <TouchableOpacity
+
               style={styles.listContainer}
               onPress={() =>
                 router.push({
@@ -89,7 +94,7 @@ export default function TabOneScreen() {
               <View style={styles.motherContainer}>
                 <CircularNumberContainer ayahNumber={item.number} />
                 <View style={styles.nameContainer}>
-                  <Text style={styles.surahName}>{item.englishName}</Text>
+                  <Text style={surahNameStyle(item.number)}>{item.englishName}</Text>
                   <Text style={styles.surahNameTranslation}>
                     {item.englishNameTranslation}
                   </Text>
@@ -123,6 +128,11 @@ const styles = StyleSheet.create({
   surahName: {
     fontSize: 18,
     fontWeight: '600',
+  },
+  surahNameGreen: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: "limegreen"
   },
   surahNameTranslation: {
     fontSize: 11,
