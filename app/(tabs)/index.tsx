@@ -47,7 +47,7 @@ export default function TabOneScreen() {
 
 
   return (
-    <View style={{ height: Dimensions.get("window").height, width: Dimensions.get("screen").width }}>
+    <View style={{ height: Dimensions.get("screen").height * 0.85, width: Dimensions.get("screen").width }}>
       {surahData != null ?
         <FlashList
           data={surahData}
