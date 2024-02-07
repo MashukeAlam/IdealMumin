@@ -71,7 +71,8 @@ const styles = StyleSheet.create({
         marginRight: 5,
         flex: 1,
         flexDirection: "row-reverse",
-
+        borderBottomWidth: 0.3,
+        borderBottomColor: "rgb(50, 50, 50)",
     },
     blurView: {
         position: 'absolute',

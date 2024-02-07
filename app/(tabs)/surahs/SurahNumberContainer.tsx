@@ -23,10 +23,11 @@ const styles = StyleSheet.create({
     width: 27,
     height: 27,
     borderRadius: 50,
-    marginLeft: 5,
-    marginRight: 5,
+    marginLeft: 9,
+    marginRight: 9,
     justifyContent: 'center',
     alignItems: 'center',
+    
   },
   numberText: {
     fontSize: 12,

@@ -31,7 +31,6 @@ export default function TabOneScreen() {
 
     const configureData = async (key: string) => {
       const jsonValue = await Storage.getItem({ key: key });
-      // console.log(jsonValue, "inside function");
 
       if (jsonValue !== null) {
         console.log("No loading was needed.");
