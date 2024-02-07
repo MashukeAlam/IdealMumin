@@ -53,10 +53,10 @@ export default function TabOneScreen() {
         fetchData();
       }
     }
-    
+
     const checkAvailabity = async () => {
       for (var i = 0; i < 114; i++) {
-        const fetchedJson = await Storage.getItem({key: `${i}`});
+        const fetchedJson = await Storage.getItem({ key: `${i}` });
         if (fetchedJson !== null) {
           setCacheMap((prevMap) => ({
             ...prevMap,
@@ -73,12 +73,39 @@ export default function TabOneScreen() {
 
   return (
     <View style={{ height: Dimensions.get("screen").height * 0.85, width: Dimensions.get("screen").width }}>
-      {surahData != null ?
+      {surahData != null ? (
         <FlashList
           data={surahData}
-          renderItem={({ item }) => <TouchableOpacity style={styles.listContainer} onPress={() => router.push({ pathname: "surahs/[id]", params: { id: item.number } })}><View style={styles.motherContainer}><CircularNumberContainer ayahNumber={item.number} /><View style={styles.nameContainer}><Text style={styles.surahName}>{item.englishName}</Text><Text style={styles.surahNameTranslation}>{item.englishNameTranslation}</Text></View></View><View><Text style={styles.surahNameArabic}>{item.name}</Text></View></TouchableOpacity>}
-          estimatedItemSize={200}
-        /> : <Text>Not loaded</Text>}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              style={styles.listContainer}
+              onPress={() =>
+                router.push({
+                  pathname: "surahs/[id]",
+                  params: { id: item.number },
+                })
+              }
+            >
+              <View style={styles.motherContainer}>
+                <CircularNumberContainer ayahNumber={item.number} />
+                <View style={styles.nameContainer}>
+                  <Text style={styles.surahName}>{item.englishName}</Text>
+                  <Text style={styles.surahNameTranslation}>
+                    {item.englishNameTranslation}
+                  </Text>
+                </View>
+              </View>
+              <View>
+                <Text style={styles.surahNameArabic}>{item.name}</Text>
+              </View>
+            </TouchableOpacity>
+          )}
+          estimatedItemSize={150}
+        />
+      ) : (
+        <Text>Not loaded</Text>
+      )}
+
     </View>
   );
 }
@@ -120,7 +147,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderBottomWidth: 0.3,
-    borderBottomColor: "rgb(50, 50, 50)"
+    borderBottomColor: "rgb(70, 70, 70)"
   },
   motherContainer: {
     flex: 1,
