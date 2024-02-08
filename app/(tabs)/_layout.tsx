@@ -67,12 +67,7 @@ export default function TabLayout() {
           
         }}
       />
-      {/* <Tabs.Screen
-        name="(surahs)/[id]"
-        options={{
-          href: null
-        }}
-      /> */}
+      
       <Tabs.Screen
         name="surahs/SurahNumberContainer"
         options={{
