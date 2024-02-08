@@ -149,7 +149,7 @@ export default function TabOneScreen() {
                     <Text style={styles.surahNameTranslation}>
                       {item.englishNameTranslation}
                     </Text>
-                    {surahRevelationType(item.number)}
+                    {surahRevelationType(item.number - 1)}
                   </View>
                 </View>
               </View>
