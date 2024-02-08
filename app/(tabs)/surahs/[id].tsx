@@ -52,12 +52,22 @@ function Surah() {
     }, [id]);
     return (
         <View style={{ height: Dimensions.get("screen").height * 0.85, width: Dimensions.get("screen").width }}>
-            {surahData != null ?
+            {surahData != null ? (
                 <FlashList
                     data={surahData}
-                    renderItem={({ item }) => (<View style={styles.listContainer}><CircularNumberContainer style={styles.ayahNumber} ayahNumber={item.numberInSurah} /><Text style={styles.textStyle}>{item.text}</Text></View>)}
+                    renderItem={({ item }) => (
+                        <View style={styles.listContainer}>
+                            <CircularNumberContainer style={styles.ayahNumber} ayahNumber={item.numberInSurah} />
+                            <Text style={styles.textStyle}>{item.text}</Text>
+                        </View>
+                    )}
                     estimatedItemSize={200}
-                /> : <View style={styles.loading}><Text>Please wait</Text></View>}
+                />
+            ) : (
+                <View style={styles.loading}>
+                    <Text>Please wait</Text>
+                </View>
+            )}
         </View>
     );
 }
