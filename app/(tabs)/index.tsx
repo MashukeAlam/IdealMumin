@@ -6,15 +6,16 @@ import { useEffect, useState } from 'react';
 import { router } from 'expo-router';
 import CircularNumberContainer from './surahs/SurahNumberContainer';
 import {SvgXml} from 'react-native-svg';
+import { useColorScheme } from '@/components/useColorScheme';
 
 interface CacheMap {
   [key: number]: boolean;
 }
 
 const svgKaaba = `
-  <svg width="800px" height="800px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--twemoji" preserveAspectRatio="xMidYMid meet">
-    <path d="M18 0L0 5v29l18 2l18-2V5z" fill="#000000"></path>
-    <path fill="#292F33" d="M18 36l18-2V5L18 0z"></path>
+  <svg  fill="#000000" width="800px" height="800px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--twemoji" preserveAspectRatio="xMidYMid meet">
+    <path d="M18 0L0 5v29l18 2l18-2V5z"></path>
+    <path d="M18 36l18-2V5L18 0z"></path>
     <path fill="#FFD983" d="M22.454 14.507v3.407l4.229.612V15.22zm7 1.181v3.239l3.299.478v-3.161zM18 13.756v3.513l1.683.244V14.04zm18 3.036l-.539-.091v3.096l.539.078z"></path>
     <path fill="#FFAC33" d="M0 16.792v3.083l.539-.078v-3.096zm16.317-2.752v3.473L18 17.269v-3.513zm-13.07 2.204v3.161l3.299-.478v-3.239zm6.07-1.024v3.306l4.229-.612v-3.407z"></path>
     <path fill="#FFD983" d="M21.389 15.131v-.042c0-.421-.143-.763-.32-.763c-.177 0-.32.342-.32.763v.042c-.208.217-.355.621-.355 1.103c0 .513.162.949.393 1.152c.064.195.163.33.282.33s.218-.135.282-.33c.231-.203.393-.639.393-1.152c-.001-.482-.147-.886-.355-1.103zm6.999 1.069v-.042c0-.421-.143-.763-.32-.763c-.177 0-.32.342-.32.763v.042c-.208.217-.355.621-.355 1.103c0 .513.162.949.393 1.152c.064.195.163.33.282.33s.218-.135.282-.33c.231-.203.393-.639.393-1.152c0-.481-.147-.885-.355-1.103zm6.017 1.03v-.039c0-.393-.134-.712-.299-.712c-.165 0-.299.319-.299.712v.039c-.194.203-.331.58-.331 1.03c0 .479.151.886.367 1.076c.059.182.152.308.263.308s.203-.126.263-.308c.215-.189.367-.597.367-1.076c0-.45-.136-.827-.331-1.03z"></path>
@@ -27,7 +28,7 @@ const svgMedinaah = `
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg fill="#000000" height="800px" width="800px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+<svg height="800px" width="800px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
 	 viewBox="0 0 383.594 383.594" xml:space="preserve">
 <path d="M375.701,201.29c0-1.98-1.078-3.693-2.668-4.629c6.516-5.986,10.561-12.909,10.561-22.79
 	c0-29.125-35.504-34.861-35.504-48.258c0,13.397-35.504,19.133-35.504,48.258c0,9.88,4.044,16.803,10.561,22.789
@@ -50,8 +51,10 @@ const svgMedinaah = `
 `;
 
 export default function TabOneScreen() {
-  const svgKaabaTSX = <SvgXml style={styles.revelationIcon} xml={svgKaaba} height={10} width={10} />;
-  const svgMedinaahTSX = <SvgXml style={styles.revelationIcon} xml={svgMedinaah} height={10} width={10} />
+  const colorScheme = useColorScheme();
+
+  const svgKaabaTSX = <SvgXml fill={colorScheme === 'dark' ? "grey" : "black"} style={styles.revelationIcon} xml={svgKaaba} height={10} width={10} />;
+  const svgMedinaahTSX = <SvgXml fill={colorScheme === 'dark' ? "grey": "black"} style={styles.revelationIcon} xml={svgMedinaah} height={10} width={10} />
   const [surahData, setSurahData] = useState(null);
 
   const [cacheMap, setCacheMap] = useState<CacheMap>(() => {
@@ -146,7 +149,7 @@ export default function TabOneScreen() {
                     <Text style={styles.surahNameTranslation}>
                       {item.englishNameTranslation}
                     </Text>
-                    {surahRevelationType(item.number)}
+                    {surahRevelationType(item.number - 1)}
                   </View>
                 </View>
               </View>
@@ -158,7 +161,7 @@ export default function TabOneScreen() {
           estimatedItemSize={150}
         />
       ) : (
-        <Text>Not loaded</Text>
+        <View style={styles.loading}><Text>Please wait</Text></View>
       )}
 
     </View>
@@ -220,9 +223,17 @@ const styles = StyleSheet.create({
   },
   surahBottomLineContainer: {
     flex: 1,
-    flexDirection: "row"
+    flexDirection: "row",
+    padding: 1
   },
   revelationIcon: {
-    margin: 5
+    margin: 5,
+    color: "green",
+  },
+  loading: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
