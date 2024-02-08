@@ -64,12 +64,12 @@ function Surah() {
 
 const styles = StyleSheet.create({
     textStyle: {
-        fontSize: 25,
+        fontSize: 26,
         fontFamily: "Uthman",
     },
     listContainer: {
         padding: 10,
-        marginRight: 5,
+        marginLeft: 2,
         flex: 1,
         flexDirection: "row-reverse",
         borderBottomWidth: 0.3,
