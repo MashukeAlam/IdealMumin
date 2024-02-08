@@ -161,7 +161,7 @@ export default function TabOneScreen() {
           estimatedItemSize={150}
         />
       ) : (
-        <Text>Not loaded</Text>
+        <View style={styles.loading}><Text>Please wait</Text></View>
       )}
 
     </View>
@@ -223,10 +223,17 @@ const styles = StyleSheet.create({
   },
   surahBottomLineContainer: {
     flex: 1,
-    flexDirection: "row"
+    flexDirection: "row",
+    padding: 1
   },
   revelationIcon: {
     margin: 5,
     color: "green",
+  },
+  loading: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center"
   }
 });

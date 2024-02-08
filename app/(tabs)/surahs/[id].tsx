@@ -57,7 +57,7 @@ function Surah() {
                     data={surahData}
                     renderItem={({ item }) => (<View style={styles.listContainer}><CircularNumberContainer style={styles.ayahNumber} ayahNumber={item.numberInSurah} /><Text style={styles.textStyle}>{item.text}</Text></View>)}
                     estimatedItemSize={200}
-                /> : <Text>Not loaded</Text>}
+                /> : <View style={styles.loading}><Text>Please wait</Text></View>}
         </View>
     );
 }
@@ -82,6 +82,12 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
     },
+    loading: {
+        flex: 1,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center"
+    }
 })
 
 export default Surah;
