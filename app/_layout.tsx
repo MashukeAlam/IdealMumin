@@ -4,7 +4,7 @@ import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
-
+import { OnboardFlow } from 'react-native-onboard';
 import { useColorScheme } from '@/components/useColorScheme';
 
 export {
@@ -50,6 +50,18 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <OnboardFlow pages={[
+        {
+          title: 'Welcome to IdeamMumin',
+          subtitle: 'Track your progress on daily religious tasks',
+        },
+        {
+          title: 'Try being consistent and build high streaks',
+          subtitle: 'Allah rewards those who do good deeds regularly even if it\'s small',
+        }
+      ]}
+      type='bottom-sheet' // Change to either 'fullscreen', 'bottom-sheet', or 'inline'
+       />
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
