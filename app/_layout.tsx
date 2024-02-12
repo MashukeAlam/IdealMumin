@@ -60,8 +60,8 @@ function RootLayoutNav() {
           subtitle: 'Allah rewards those who do good deeds regularly even if it\'s small',
         }
       ]}
-      type='bottom-sheet' // Change to either 'fullscreen', 'bottom-sheet', or 'inline'
-       />
+        type='bottom-sheet'
+      />
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
